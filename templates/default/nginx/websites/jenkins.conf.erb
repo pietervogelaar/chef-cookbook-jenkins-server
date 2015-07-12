@@ -1,0 +1,39 @@
+server {
+    server_name <%= node['jenkins-server']['host'] %>;
+
+    listen 80;
+    listen 443 ssl;
+    ssl_certificate      /etc/ssl/certs/<%= node['jenkins-server']['host'] %>.cert;
+    ssl_certificate_key  /etc/ssl/private/<%= node['jenkins-server']['host'] %>.key;
+
+    root /var/www/nginx-default;
+    index index.php index.html index.htm;
+
+    location / {
+        # Force SSL
+        if ($ssl_protocol = "") {
+            return 301 https://$http_host$request_uri;
+        }
+
+        # Disable any basic authentication headers
+        proxy_set_header Authorization "";
+
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+        proxy_set_header    X-Forwarded-Host $host;
+        proxy_set_header    X-Forwarded-Server $host;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto $scheme;
+
+        proxy_pass          http://localhost:<%= node['jenkins']['master']['port'] %>;
+        proxy_read_timeout  90;
+
+        # Fix the “It appears that your reverse proxy set up is broken" error
+        proxy_redirect      http://localhost:<%= node['jenkins']['master']['port'] %> $scheme://<%= node['jenkins-server']['host'] %>;
+    }
+
+    # Deny access to .htaccess files, if Apache's document root concurs with nginx's one
+    location ~ /\.ht {
+        deny  all;
+    }
+}

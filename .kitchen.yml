@@ -12,7 +12,7 @@ platforms:
   - name: centos-7.0
     driver_config:
       network:
-        - ["private_network", {ip: "33.33.73.10"}]
+        - ["private_network", {ip: "33.33.11.10"}]
 
 suites:
   - name: jenkins-production
@@ -22,7 +22,7 @@ suites:
     driver:
       vm_hostname: jenkins001.local
       network:
-        - ["private_network", {ip: "33.33.71.170"}]
+        - ["private_network", {ip: "33.33.11.170"}]
     run_list: 'recipe[jenkins-server]'
     attributes:
       dev_mode: true
@@ -33,7 +33,7 @@ suites:
     driver:
       vm_hostname: jenkins001.local
       network:
-        - ["private_network", {ip: "33.33.73.170"}]
+        - ["private_network", {ip: "33.33.13.170"}]
     run_list: 'recipe[jenkins-server]'
     attributes:
       dev_mode: true

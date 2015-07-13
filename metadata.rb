@@ -10,3 +10,4 @@ supports         'centos', '>= 6.6'
 supports         'ubuntu', '>= 14.04'
 
 depends 'jenkins', '>= 2.3.1'
+depends 'java'

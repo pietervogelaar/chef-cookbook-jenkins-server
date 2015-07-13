@@ -3,6 +3,7 @@ default['jenkins-server']['rsa']['key_size'] = 2048
 default['jenkins-server']['admin']['username'] = 'admin'
 default['jenkins-server']['security']['chef-vault']['data_bag'] = 'jenkins-users'
 default['jenkins-server']['security']['chef-vault']['data_bag_item'] = node['jenkins-server']['admin']['username']
+default['jenkins-server']['java']['install'] = true
 default['jenkins-server']['plugins'] = {
     # General
     'greenballs' => {'version' => '1.14'},

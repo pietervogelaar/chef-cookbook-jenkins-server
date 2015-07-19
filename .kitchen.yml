@@ -15,25 +15,14 @@ platforms:
         - ["private_network", {ip: "33.33.11.10"}]
 
 suites:
-  - name: jenkins-production
+  - name: jenkins-server
     provisioner:
       client_rb:
         environment: production
     driver:
-      vm_hostname: jenkins001.local
+      vm_hostname: jenkins-server001.local
       network:
         - ["private_network", {ip: "33.33.11.170"}]
-    run_list: 'recipe[jenkins-server]'
-    attributes:
-      dev_mode: true
-  - name: jenkins-testing
-    provisioner:
-      client_rb:
-        environment: testing
-    driver:
-      vm_hostname: jenkins001.local
-      network:
-        - ["private_network", {ip: "33.33.13.170"}]
     run_list: 'recipe[jenkins-server]'
     attributes:
       dev_mode: true

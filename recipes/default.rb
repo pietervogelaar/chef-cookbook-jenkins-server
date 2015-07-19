@@ -1,7 +1,5 @@
-if node['jenkins-server']['java']['install']
-  include_recipe 'java'
-end
-
-include_recipe 'jenkins::master'
+include_recipe 'jenkins-server::packages'
+include_recipe 'jenkins-server::master'
 include_recipe 'jenkins-server::security'
+include_recipe 'jenkins-server::settings'
 include_recipe 'jenkins-server::plugins'

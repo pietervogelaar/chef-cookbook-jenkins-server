@@ -1,36 +1,66 @@
+# General
 default['jenkins-server']['host'] = 'jenkins.example.com'
-default['jenkins-server']['rsa']['key_size'] = 2048
 default['jenkins-server']['admin']['username'] = 'admin'
 default['jenkins-server']['security']['chef-vault']['data_bag'] = 'jenkins-users'
 default['jenkins-server']['security']['chef-vault']['data_bag_item'] = node['jenkins-server']['admin']['username']
-default['jenkins-server']['java']['install'] = true
+
+# Packages
+default['jenkins-server']['packages']['java']['install'] = true
+default['jenkins-server']['packages']['ant']['install'] = true
+default['jenkins-server']['packages']['git']['install'] = true
+
+# Settings
+default['jenkins-server']['settings']['executors'] = node['cpu']['total'] < 2 ? 2 : node['cpu']['total']
+default['jenkins-server']['settings']['slave_agent_port'] = 0 # Port | 0 to indicate random available TCP port | -1 to disable this service
+
+default['jenkins-server']['settings']['system_email'] = 'Jenkins <jenkins@localhost.local>'
+
+# Plugins
 default['jenkins-server']['plugins'] = {
-    # General
-    'greenballs' => {'version' => '1.14'},
-    'locale' => {'version' => '1.2'},
-    'gravatar' => {'version' => '2.1'},
-    'ws-cleanup' => {'version' => '0.26'},
-    'ansicolor' => {'version' => '0.4.1'},
-    'build-monitor-plugin' => {'version' => '1.6+build.150'},
-    'git' => {'version' => '2.3.5'},
-    'ant' => {'version' => '1.2'},
+  # General
+  'greenballs' => {'version' => '1.14'},
+  'locale' => {
+    'version' => '1.2',
+    'configure' => true,
+    'system_locale' => 'en',
+    'ignore_accept_language' => true
+  },
+  'antisamy-markup-formatter' => {
+      'version' => '1.3',
+      'configure' => true,
+      # Markup: safe_html or plain_text
+      'markup' => 'safe_html',
+      # Disable syntax highlighting is only available with safe_html markup
+      'disable_syntax_highlighting' => false,
+  },
+  'gravatar' => {'version' => '2.1'},
+  'ws-cleanup' => {'version' => '0.26'},
+  'ansicolor' => {'version' => '0.4.1'},
+  'build-monitor-plugin' => {'version' => '1.6+build.150'},
+  'git' => {
+    'version' => '2.3.5',
+    'configure' => true,
+    'global_config_name' => 'Jenkins',
+    'global_config_email' => 'jenkins@localhost.local'
+  },
+  'ant' => {'version' => '1.2'},
 
-    # Jenkins PHP (jenkins-php.org)
-    'checkstyle' => {'version' => '3.42'},
-    'cloverphp' => {'version' => '0.4'},
-    'crap4j' => {'version' => '0.9'},
-    'dry' => {'version' => '2.41'},
-    'htmlpublisher' => {'version' => '1.4'},
-    'jdepend' => {'version' => '1.2.4'},
-    'plot' => {'version' => '1.9'},
-    'pmd' => {'version' => '3.41'},
-    'violations' => {'version' => '0.7.11'},
-    'warnings' => {'version' => '4.48'},
-    'xunit' => {'version' => '1.96'},
+  # Jenkins PHP (jenkins-php.org)
+  'checkstyle' => {'version' => '3.42'},
+  'cloverphp' => {'version' => '0.4'},
+  'crap4j' => {'version' => '0.9'},
+  'dry' => {'version' => '2.41'},
+  'htmlpublisher' => {'version' => '1.4'},
+  'jdepend' => {'version' => '1.2.4'},
+  'plot' => {'version' => '1.9'},
+  'pmd' => {'version' => '3.41'},
+  'violations' => {'version' => '0.7.11'},
+  'warnings' => {'version' => '4.48'},
+  'xunit' => {'version' => '1.96'},
 
-    # BitBucket
-    'bitbucket' => {'version' => '1.1.1'},
-    'bitbucket-pullrequest-builder' => {'version' => '1.4.5'}
+  # BitBucket
+  'bitbucket' => {'version' => '1.1.1'},
+  'bitbucket-pullrequest-builder' => {'version' => '1.4.5'}
 }
 
 # Dev_mode attributes

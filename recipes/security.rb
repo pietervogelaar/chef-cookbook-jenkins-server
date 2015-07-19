@@ -34,13 +34,14 @@ jenkins_script 'configure permissions' do
     import hudson.security.*
 
     def instance = Jenkins.getInstance()
+
     def hudsonRealm = new HudsonPrivateSecurityRealm(false)
     instance.setSecurityRealm(hudsonRealm)
 
     def strategy = new GlobalMatrixAuthorizationStrategy()
     strategy.add(Jenkins.ADMINISTER, "#{node['jenkins-server']['admin']['username']}")
-
     instance.setAuthorizationStrategy(strategy)
+
     instance.save()
   EOH
   notifies :create, 'ruby_block[set jenkins_security_enabled flag]', :immediately

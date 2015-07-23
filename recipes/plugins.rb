@@ -22,7 +22,7 @@ unless node.attribute?('jenkins_restarted_once')
 end
 
 # Configure plugins
-Chef::Log.debug '[JENKINS-SERVER] Configure jenkins plugins'
+Chef::Log.debug '[JENKINS-SERVER] Configure Jenkins plugins'
 
 node['jenkins-server']['plugins'].each do |plugin, options|
   if options && options['configure']

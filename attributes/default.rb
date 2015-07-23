@@ -1,19 +1,36 @@
 # General
-default['jenkins-server']['host'] = 'jenkins.example.com'
 default['jenkins-server']['admin']['username'] = 'admin'
 default['jenkins-server']['security']['chef-vault']['data_bag'] = 'jenkins-users'
 default['jenkins-server']['security']['chef-vault']['data_bag_item'] = node['jenkins-server']['admin']['username']
 
+# Nginx
+default['jenkins-server']['nginx']['install'] = true
+default['jenkins-server']['nginx']['server_name'] = 'jenkins-server001.local'
+default['jenkins-server']['nginx']['template_cookbook'] = 'jenkins-server'
+default['jenkins-server']['nginx']['template_source'] = 'nginx/jenkins.conf.erb'
+default['jenkins-server']['nginx']['ssl'] = false
+default['jenkins-server']['nginx']['ssl_cert_path'] = nil
+default['jenkins-server']['nginx']['ssl_key_path'] = nil
+
 # Packages
-default['jenkins-server']['packages']['java']['install'] = true
-default['jenkins-server']['packages']['ant']['install'] = true
-default['jenkins-server']['packages']['git']['install'] = true
+default['jenkins-server']['java']['install'] = true
+default['jenkins-server']['ant']['install'] = true
+default['jenkins-server']['git']['install'] = true
+default['jenkins-server']['composer']['install'] = true
+default['jenkins-server']['composer']['template_cookbook'] = 'jenkins-server'
+default['jenkins-server']['composer']['template_source'] = 'composer/composer.json.erb'
 
 # Settings
 default['jenkins-server']['settings']['executors'] = node['cpu']['total'] < 2 ? 2 : node['cpu']['total']
 default['jenkins-server']['settings']['slave_agent_port'] = 0 # Port | 0 to indicate random available TCP port | -1 to disable this service
-
 default['jenkins-server']['settings']['system_email'] = 'Jenkins <jenkins@localhost.local>'
+default['jenkins-server']['settings']['mailer']['smtp_host'] = 'localhost'
+default['jenkins-server']['settings']['mailer']['username'] = 'mailer'
+default['jenkins-server']['settings']['mailer']['password'] = 'mailer'
+default['jenkins-server']['settings']['mailer']['use_ssl'] = true
+default['jenkins-server']['settings']['mailer']['smtp_port'] = 25
+default['jenkins-server']['settings']['mailer']['reply_to_address'] = node['jenkins-server']['settings']['system_email']
+default['jenkins-server']['settings']['mailer']['charset'] = 'UTF-8'
 
 # Plugins
 default['jenkins-server']['plugins'] = {
@@ -26,7 +43,7 @@ default['jenkins-server']['plugins'] = {
     'ignore_accept_language' => true
   },
   'antisamy-markup-formatter' => {
-      'version' => '1.3',
+      'version' => '1.1',
       'configure' => true,
       # Markup: safe_html or plain_text
       'markup' => 'safe_html',
@@ -62,6 +79,9 @@ default['jenkins-server']['plugins'] = {
   'bitbucket' => {'version' => '1.1.1'},
   'bitbucket-pullrequest-builder' => {'version' => '1.4.5'}
 }
+
+# Jobs
+default['jenkins-server']['jobs']['php-template'] = {}
 
 # Dev_mode attributes
 default['jenkins-server']['dev_mode']['security']['password'] = 'admin'

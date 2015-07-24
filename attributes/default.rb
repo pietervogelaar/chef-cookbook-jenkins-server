@@ -6,6 +6,7 @@ default['jenkins-server']['security']['chef-vault']['data_bag_item'] = node['jen
 # Nginx
 default['jenkins-server']['nginx']['install'] = true
 default['jenkins-server']['nginx']['server_name'] = 'jenkins-server001.local'
+default['jenkins-server']['nginx']['server_default'] = true
 default['jenkins-server']['nginx']['template_cookbook'] = 'jenkins-server'
 default['jenkins-server']['nginx']['template_source'] = 'nginx/jenkins.conf.erb'
 default['jenkins-server']['nginx']['ssl'] = false

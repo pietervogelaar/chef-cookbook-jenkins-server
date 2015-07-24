@@ -23,6 +23,7 @@ These platforms are officially supported, but it will probably work on other pla
 
 * `default['jenkins-server']['nginx']['install']` - Default `true`. Jenkins is proxied behind Nginx. If you want to disable this, set this attribute to `false` and `default['jenkins']['master']['listen_address']` to `0.0.0.0`. Jenkins will then be reachable on port 8080.
 * `default['jenkins-server']['nginx']['server_name']` - Server name / hostname. Default "jenkins-server001.local"
+* `default['jenkins-server']['nginx']['server_default']` - If the Jenkins server block must be the default/catch all. Default `true`
 * `default['jenkins-server']['nginx']['template_cookbook']` - The cookbook for the Nginx server template. Default "jenkins-server"
 * `default['jenkins-server']['nginx']['template_source']` - The source for the Nginx server template. Default "nginx/jenkins.conf.erb"
 * `default['jenkins-server']['nginx']['ssl']` - If a SSL connection must be used and forced. Default `false`

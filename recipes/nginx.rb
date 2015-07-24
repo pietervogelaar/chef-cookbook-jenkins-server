@@ -1,6 +1,6 @@
 include_recipe 'nginx'
 
-template "#{node['nginx']['dir']}/sites-available/jenkins.conf" do
+template "#{node['nginx']['dir']}/sites-available/#{node['jenkins-server']['nginx']['server_name']}" do
   cookbook node['jenkins-server']['nginx']['template_cookbook']
   source node['jenkins-server']['nginx']['template_source']
   owner  node['nginx']['user']
@@ -9,6 +9,6 @@ template "#{node['nginx']['dir']}/sites-available/jenkins.conf" do
   notifies :reload, "service[#{node['nginx']['package_name']}]", :delayed
 end
 
-nginx_site 'jenkins.conf' do
+nginx_site node['jenkins-server']['nginx']['server_name'] do
   enable true
 end

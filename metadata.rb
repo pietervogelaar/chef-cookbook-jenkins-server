@@ -4,7 +4,7 @@ maintainer_email 'pieter@pietervogelaar.nl'
 license          'MIT'
 description      'Installs/Configures jenkins-server'
 long_description 'Installs/Configures jenkins-server'
-version          '0.3.0'
+version          '0.3.1'
 
 supports         'centos', '>= 6.6'
 supports         'redhat', '>= 6.6'

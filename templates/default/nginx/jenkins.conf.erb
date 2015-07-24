@@ -1,10 +1,6 @@
 server {
     server_name <%= node['jenkins-server']['nginx']['server_name'] %>;
-    <% if node['jenkins-server']['nginx']['server_default'] %>
-    server_name _; # default "catch all" if nothing matches
-    <% end %>
-
-    listen 80;
+    listen 80 <% if node['jenkins-server']['nginx']['server_default'] %>default_server<% end %>;
 
     <% if node['jenkins-server']['nginx']['ssl'] %>
     listen 443 ssl;

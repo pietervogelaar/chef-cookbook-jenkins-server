@@ -1,6 +1,6 @@
 # jenkins-server
 
-This cookbook installs a complete Jenkins server with plugins and is highly configurable with attributes in this cookbook. It depends on the [Jenkins](https://supermarket.chef.io/cookbooks/jenkins) cookbook that is used as foundation. 
+This cookbook installs a complete Jenkins server with plugins and is highly configurable with attributes in this cookbook. It depends on the [Jenkins](https://supermarket.chef.io/cookbooks/jenkins) cookbook that is used as foundation. It also installs (but can be disabled) the Jenkins plugins, php-template job and required PHP tools as described on [jenkins-php.org](http://jenkins-php.org).
 
 ## Supported Platforms
 

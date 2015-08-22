@@ -1,16 +1,45 @@
+# Collect a list of envVars strings
+env_vars = []
+
+node['jenkins-server']['settings']['global_properties']['env_vars'].each do |name, value|
+  env_vars << "envVars.put('#{name}', '#{value}')"
+end
+
+# Configure settings
 jenkins_script 'configure settings' do
   command <<-EOH.gsub(/^ {4}/, '')
     import jenkins.model.*
 
     def instance = Jenkins.getInstance()
 
+    // General
     instance.setNumExecutors(#{node['jenkins-server']['settings']['executors']})
     instance.setSlaveAgentPort(#{node['jenkins-server']['settings']['slave_agent_port']})
+
     instance.save()
 
-    def jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
+    // Global properties
+    def globalNodeProperties = instance.getGlobalNodeProperties()
+    def environmentVariablesNodePropertyList = globalNodeProperties.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+
+    def envVars = null
+
+    if (environmentVariablesNodePropertyList == null || environmentVariablesNodePropertyList.size() == 0) {
+        def newEnvironmentVariablesNodeProperty = new hudson.slaves.EnvironmentVariablesNodeProperty();
+
+        globalNodeProperties.add(newEnvironmentVariablesNodeProperty)
+        envVars = newEnvironmentVariablesNodeProperty.getEnvVars()
+    } else {
+        envVars = environmentVariablesNodePropertyList.get(0).getEnvVars()
+    }
+
+    #{env_vars.join("\n")}
+
+    instance.save()
 
     // Admin address
+    def jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
+
     jenkinsLocationConfiguration.setAdminAddress('#{node['jenkins-server']['settings']['system_email']}')
     jenkinsLocationConfiguration.save()
 

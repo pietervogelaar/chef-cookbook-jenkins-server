@@ -24,6 +24,9 @@ default['jenkins-server']['composer']['template_source'] = 'composer/composer.js
 # Settings
 default['jenkins-server']['settings']['executors'] = node['cpu']['total'] < 2 ? 2 : node['cpu']['total']
 default['jenkins-server']['settings']['slave_agent_port'] = 0 # Port | 0 to indicate random available TCP port | -1 to disable this service
+default['jenkins-server']['settings']['global_properties']['env_vars'] = {
+    'PATH' => "$PATH:/usr/local/bin:#{node['jenkins']['master']['home']}/.composer/vendor/bin",
+}
 default['jenkins-server']['settings']['system_email'] = 'Jenkins <jenkins@localhost.local>'
 default['jenkins-server']['settings']['mailer']['smtp_host'] = 'localhost'
 default['jenkins-server']['settings']['mailer']['username'] = 'mailer'

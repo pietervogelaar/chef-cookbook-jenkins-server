@@ -1,3 +1,12 @@
+# 0.3.2
+
+- Added an attribute to configure global properties in Jenkins
+- Fixes bug: Nginx server block for Jenkins is not default
+
+# 0.3.1
+
+- Updated changelog
+
 # 0.3.0
 
 - Added Nginx

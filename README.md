@@ -9,7 +9,7 @@ This cookbook installs a complete Jenkins server with plugins and is highly conf
 - Ubuntu >= 12.04
 - Debian >= 7.0
 
-These platforms are officially supported, but it will probably work on other platforms to.
+These platforms are officially supported, but it will probably also work on other platforms.
 
 ## Attributes
 

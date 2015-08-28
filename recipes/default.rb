@@ -20,3 +20,8 @@ include_recipe 'jenkins-server::settings'
 include_recipe 'jenkins-server::plugins'
 include_recipe 'jenkins-server::jobs'
 include_recipe 'jenkins-server::composer'
+
+if node['jenkins-server']['slaves']['enable']
+  include_recipe 'jenkins-server::slaves_credentials'
+  include_recipe 'jenkins-server::slaves'
+end

@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Added support for SSH slaves
+
 # 0.3.2
 
 - Added an attribute to configure global properties in Jenkins

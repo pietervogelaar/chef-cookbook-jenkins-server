@@ -87,6 +87,12 @@ default['jenkins-server']['plugins'] = {
 # Jobs
 default['jenkins-server']['jobs']['php-template'] = {}
 
+# Slaves
+default['jenkins-server']['slaves']['enable'] = false
+default['jenkins-server']['slaves']['data_bag'] = 'jenkins-slaves'
+default['jenkins-server']['slaves']['credential']['username'] = 'deployer' # The Jenkins master will login as this user on slaves
+default['jenkins-server']['slaves']['credential']['description'] = 'Deployer'
+
 # Dev_mode attributes
 default['jenkins-server']['dev_mode']['security']['password'] = 'admin'
 default['jenkins-server']['dev_mode']['security']['public_key'] = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDn23T41ZUS5PVhkns4+kf0nFoH2UoxHlpc5O3zAFOssBRbVcfGVdQk9MYSA8upeVQr1p3ccgOdDivpYx+Cg2oTATnQHJCHihzueMxsIxmVOm7b78MF8IWIXWzdxsZMbjInhTFuEC4I2wWg1BCxottWzqgDLYt753KdW1+D7i7MaJIBB4sJ9PLx3MgHnsTiAB5BDIVtkJUM2q3UTszV3RMa8gbb0QkCjamTypKoeTjM/rTQQLIOH79yvVSv2FRlcGzwpsAnZT46T9K+AyrEcAlH5Eo2Bk92xbcHhGnoGlzOBAgxqLJ3v6pDVnUefRiqjxZ7N+tPbbhzeaD0pWQe99GmKAuBMfFfbDzA/Q7DIhRQ8ddVs9Ol7iNNp1xkxksgO1GekwxbrDBkIO4olxEzATCLkvDLLREQ2DtWeOQN5P0U3HR5q2Kf8qCl4vniDc72QJTxE4KG2KHrgXiuFn3poc9k6RkI076nTY0N5mXKd/lEze+3xVxBBnHe/a0ibWG08FMuh4TDkzX459PW0xIWmXVt2OCtisZOSs0JG7E0Qo6ymIFcHpfROvH/FYxDorWJdvRq23K2Zok97b83jh7W7FjEnrJyyT9OiaJcW3fUcrJvlvvxrjAFmeRiUgXnmSqfCRLsDiRQ4mgfnJ7dZYSD+RYSiiiOb+79TJTihw+jDoADOQ== jenkins-security'

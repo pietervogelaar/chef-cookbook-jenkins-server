@@ -71,6 +71,13 @@ Jenkins jobs can be specified with attributes like:
     
 By default the "php-template" job is installed from [Jenkins-php.org](http://jenkins-php.org). 
 
+### Slaves
+
+* `default['jenkins-server']['slaves']['enable']` - If slaves must be enabled. Default `false`
+* `default['jenkins-server']['slaves']['data_bag']` - The name of the data bag that contains jenkins slaves. Default "jenkins-slaves"
+* `default['jenkins-server']['slaves']['credential']['username']` - The Jenkins master will login as this user on slaves. Default "deployer"
+* `default['jenkins-server']['slaves']['credential']['description']` - Description. Default "Deployer"
+
 ### Dev mode
 
 If you are developing/testing your (wrapper) cookbook locally, chef-vault communication will be very difficult. If you set an attribute `default['dev_mode']` to `true` then these attributes
@@ -177,6 +184,11 @@ The default recipe includes the following recipies:
     include_recipe 'jenkins-server::jobs'
     include_recipe 'jenkins-server::composer'
     
+    if node['jenkins-server']['slaves']['enable']
+      include_recipe 'jenkins-server::slaves_credentials'
+      include_recipe 'jenkins-server::slaves'
+    end
+
 ## License
 
 The MIT License (MIT)

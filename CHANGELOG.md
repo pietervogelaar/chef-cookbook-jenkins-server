@@ -1,3 +1,8 @@
+# 0.5.0
+
+- BC break: SSH slaves are found with a search on a node attribute instead of a data bag. The creation of a
+  data bag item from a recipe requires admin permissions which is not desirable.
+
 # 0.4.0
 
 - Added support for SSH slaves

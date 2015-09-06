@@ -1,11 +1,15 @@
-# Get the slaves data bag
-slaves = data_bag(node['jenkins-server']['slaves']['data_bag'])
+# Search for nodes that have an attribute node['jenkins-server']['slave']
+search(:node, node['jenkins-server']['slaves']['search_query'],
+  :filter_result => {
+    'jenkins-server' => [ 'jenkins-server' ],
+  }
+).each do |item|
+  Chef::Log.debug "[JENKINS-SERVER]: Slave search result item [#{item}]"
 
-# Add slaves from data bag items
-slaves.each do |data_bag_item_id|
-  slave = data_bag_item(node['jenkins-server']['slaves']['data_bag'], data_bag_item_id)
+  slave = item['jenkins-server']['slave']
 
   if slave.key?('type') && slave['type'] == 'ssh'
+    # Add Jenkins SSH slave
     jenkins_ssh_slave slave['name'] do
       host        slave['host']
       credentials slave['credentials']

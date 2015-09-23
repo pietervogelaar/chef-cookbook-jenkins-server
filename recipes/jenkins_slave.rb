@@ -20,9 +20,10 @@ data = {
   'remote_fs' => '/tmp',
   'executors' => 10,
   'labels' => [
-    fqdn_parts[0],
     node['fqdn'],
-    "#{type}#{environment}"
+    fqdn_parts[0],
+    "#{type}.#{node.chef_environment}",
+    type
   ],
   'usage_mode' => 'exclusive',
   'availability' => 'always'

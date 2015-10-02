@@ -13,7 +13,8 @@ end
 unless node.attribute?('jenkins_restarted_once')
   Chef::Log.debug '[JENKINS-SERVER] First time Jenkins restart'
 
-  service 'jenkins' do
+  service 'jenkins restart' do
+    service_name 'jenkins'
     action :restart
   end
 

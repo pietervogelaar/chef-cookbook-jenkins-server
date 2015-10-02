@@ -1,3 +1,10 @@
+# 0.5.1
+
+- Fixes: Jenkins is not restarted after installing plugins for the first time
+- Added type.chef_environment so that environment is not empty in production
+- Set Nginx default_site_enabled to false
+- Added chef-vault dependency
+
 # 0.5.0
 
 - BC break: SSH slaves are found with a search on a node attribute instead of a data bag. The creation of a

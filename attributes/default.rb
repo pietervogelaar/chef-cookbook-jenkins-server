@@ -28,12 +28,12 @@ default['jenkins-server']['settings']['global_properties']['env_vars'] = {
     'PATH' => "$PATH:/usr/local/bin:#{node['jenkins']['master']['home']}/.composer/vendor/bin",
 }
 default['jenkins-server']['settings']['system_email'] = 'Jenkins <jenkins@localhost.local>'
-default['jenkins-server']['settings']['mailer']['smtp_host'] = 'localhost'
-default['jenkins-server']['settings']['mailer']['username'] = 'mailer'
-default['jenkins-server']['settings']['mailer']['password'] = 'mailer'
-default['jenkins-server']['settings']['mailer']['use_ssl'] = true
-default['jenkins-server']['settings']['mailer']['smtp_port'] = 25
-default['jenkins-server']['settings']['mailer']['reply_to_address'] = node['jenkins-server']['settings']['system_email']
+default['jenkins-server']['settings']['mailer']['smtp_host'] = ''
+default['jenkins-server']['settings']['mailer']['username'] = ''
+default['jenkins-server']['settings']['mailer']['password'] = ''
+default['jenkins-server']['settings']['mailer']['use_ssl'] = false
+default['jenkins-server']['settings']['mailer']['smtp_port'] = ''
+default['jenkins-server']['settings']['mailer']['reply_to_address'] = ''
 default['jenkins-server']['settings']['mailer']['charset'] = 'UTF-8'
 
 # Plugins

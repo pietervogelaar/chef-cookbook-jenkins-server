@@ -38,7 +38,7 @@ jenkins_script 'configure permissions' do
     def hudsonRealm = new HudsonPrivateSecurityRealm(false)
     instance.setSecurityRealm(hudsonRealm)
 
-    def strategy = new GlobalMatrixAuthorizationStrategy()
+    def strategy = new ProjectMatrixAuthorizationStrategy()
     strategy.add(Jenkins.ADMINISTER, "#{node['jenkins-server']['admin']['username']}")
     instance.setAuthorizationStrategy(strategy)
 

@@ -1,3 +1,9 @@
+# 0.5.2
+- Implemented alternative plugin configuration with a template. This fixes the flapping locale plugin configuration on jenkins restart.
+- Set mailer defaults to use the local system mail by default
+- Set ProjectMatrixAuthorizationStrategy instead of GlobalMatrixAuthorizationStrategy
+- Added ssh_identity recipe to generate a SSH identity with Ruby in the Jenkins home folder
+
 # 0.5.1
 
 - Fixes: Jenkins is not restarted after installing plugins for the first time

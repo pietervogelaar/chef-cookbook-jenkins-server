@@ -4,7 +4,7 @@ maintainer_email 'pieter@pietervogelaar.nl'
 license          'MIT'
 description      'Installs/Configures jenkins-server with plugins and php-template'
 long_description 'Installs/Configures jenkins-server with plugins and php-template'
-version          '0.5.1'
+version          '0.5.2'
 
 supports         'centos', '>= 6.6'
 supports         'redhat', '>= 6.6'

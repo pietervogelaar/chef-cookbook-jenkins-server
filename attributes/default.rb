@@ -42,7 +42,7 @@ default['jenkins-server']['plugins'] = {
   'greenballs' => {'version' => '1.14'},
   'locale' => {
     'version' => '1.2',
-    'configure' => true,
+    'configure' => 'template',
     'system_locale' => 'en',
     'ignore_accept_language' => true
   },

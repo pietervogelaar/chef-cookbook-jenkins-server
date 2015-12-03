@@ -200,4 +200,4 @@ The MIT License (MIT)
  
 ## Authors
 
-Author:: Pieter Vogelaar (pieter@pietervogelaar.nl)
+Author:: Pieter Vogelaar (pieter@pietervogelaar.nl) - Freelancer

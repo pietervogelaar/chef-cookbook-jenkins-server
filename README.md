@@ -16,8 +16,11 @@ These platforms are officially supported, but it will probably also work on othe
 ### General
 
 * `default['jenkins-server']['admin']['username']` - Sets the username for the administrator user. Default "admin"
+* `default['jenkins-server']['admin']['password']` - Sets the password for the administrator user. Default "admin". Only used if the security strategy is "generate"
+* `default['jenkins-server']['security']['strategy']` - Sets the security strategy. "generate" (default) or "chef-vault"
 * `default['jenkins-server']['security']['chef-vault']['data_bag']` - Name of the data bag for jenkins users
 * `default['jenkins-server']['security']['chef-vault']['data_bag_item']` - ID of the data bag to use as administrator user. This data bag must contain a password, private_key and public_key property
+* `default['jenkins-server']['security']['notifies']['resource']` - Set the resource that must be executed after admin user creation
 
 ### Nginx
 

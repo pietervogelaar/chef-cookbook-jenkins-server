@@ -1,4 +1,10 @@
+# 0.5.3
+
+- Made executed resource after admin user creation configurable
+- Added security strategy with "generate" as default instead of "chef-vault"
+
 # 0.5.2
+
 - Implemented alternative plugin configuration with a template. This fixes the flapping locale plugin configuration on jenkins restart.
 - Set mailer defaults to use the local system mail by default
 - Set ProjectMatrixAuthorizationStrategy instead of GlobalMatrixAuthorizationStrategy

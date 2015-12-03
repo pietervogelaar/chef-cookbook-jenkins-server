@@ -1,7 +1,10 @@
 # General
 default['jenkins-server']['admin']['username'] = 'admin'
+default['jenkins-server']['admin']['password'] = 'admin' # only used if the security strategy is "generate"
+default['jenkins-server']['security']['strategy'] = 'generate' # generate or chef-vault
 default['jenkins-server']['security']['chef-vault']['data_bag'] = 'jenkins-users'
 default['jenkins-server']['security']['chef-vault']['data_bag_item'] = node['jenkins-server']['admin']['username']
+default['jenkins-server']['security']['notifies']['resource'] = 'jenkins_script[configure permissions]'
 
 # Nginx
 default['jenkins-server']['nginx']['install'] = true

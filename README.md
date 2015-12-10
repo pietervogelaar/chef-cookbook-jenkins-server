@@ -20,7 +20,7 @@ These platforms are officially supported, but it will probably also work on othe
 * `default['jenkins-server']['security']['strategy']` - Sets the security strategy. "generate" (default) or "chef-vault"
 * `default['jenkins-server']['security']['chef-vault']['data_bag']` - Name of the data bag for jenkins users
 * `default['jenkins-server']['security']['chef-vault']['data_bag_item']` - ID of the data bag to use as administrator user. This data bag must contain a password, private_key and public_key property
-* `default['jenkins-server']['security']['notifies']['resource']` - Sets the resource that must be executed after admin user creation
+* `default['jenkins-server']['security']['notifies']['resource']` - Sets the resource that must be executed after admin user creation. By default "jenkins_script[configure permissions]", but use "jenkins_script[configure crowd permissions]" for Jenkins authentication with a JIRA account.
 
 ### Nginx
 

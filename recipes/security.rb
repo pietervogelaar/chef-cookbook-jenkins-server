@@ -53,7 +53,7 @@ jenkins_user node['jenkins-server']['admin']['username'] do
   notifies :execute, node['jenkins-server']['security']['notifies']['resource'], :immediately
 end
 
-# By default Jenkins allows everybody. Configure "Global Matrix Authorization" and
+# By default Jenkins allows everybody. Configure "Project Matrix Authorization" and
 # give the admin user the "administrator" permission
 jenkins_script 'configure permissions' do
   command <<-EOH.gsub(/^ {4}/, '')
@@ -64,6 +64,65 @@ jenkins_script 'configure permissions' do
 
     def hudsonRealm = new HudsonPrivateSecurityRealm(false)
     instance.setSecurityRealm(hudsonRealm)
+
+    def strategy = new ProjectMatrixAuthorizationStrategy()
+    strategy.add(Jenkins.ADMINISTER, "#{node['jenkins-server']['admin']['username']}")
+    instance.setAuthorizationStrategy(strategy)
+
+    instance.save()
+  EOH
+  notifies :create, 'ruby_block[set jenkins_security_enabled flag]', :immediately
+  action :nothing
+end
+
+# By default Jenkins allows everybody. Configure "Project Matrix Authorization", the CrowdSecurityRealm
+# for authentication with a JIRA account and give the admin user the "administrator" permission.
+jenkins_script 'configure crowd permissions' do
+  command <<-EOH.gsub(/^ {4}/, '')
+    import jenkins.model.*
+    import hudson.security.*
+
+    def instance = Jenkins.getInstance()
+
+    def url = '#{node['jenkins-server']['plugins']['crowd2']['url']}'
+    def applicationName = '#{node['jenkins-server']['plugins']['crowd2']['applicationName']}'
+    def password = '#{node['jenkins-server']['plugins']['crowd2']['password']}'
+    def group = '#{node['jenkins-server']['plugins']['crowd2']['group']}'
+    def nestedGroups = #{node['jenkins-server']['plugins']['crowd2']['nestedGroups']}
+    def sessionValidationInterval = #{node['jenkins-server']['plugins']['crowd2']['sessionValidationInterval']}
+    def useSSO = #{node['jenkins-server']['plugins']['crowd2']['useSSO']}
+    def cookieDomain = '#{node['jenkins-server']['plugins']['crowd2']['cookieDomain']}'
+    def cookieTokenkey = '#{node['jenkins-server']['plugins']['crowd2']['cookieTokenKey']}'
+    def useProxy = #{node['jenkins-server']['plugins']['crowd2']['useProxy']}
+    def httpProxyHost = '#{node['jenkins-server']['plugins']['crowd2']['httpProxyHost']}'
+    def httpProxyPort = '#{node['jenkins-server']['plugins']['crowd2']['httpProxyPort']}'
+    def httpProxyUsername = '#{node['jenkins-server']['plugins']['crowd2']['httpProxyUsername']}'
+    def httpProxyPassword = '#{node['jenkins-server']['plugins']['crowd2']['httpProxyPassword']}'
+    def socketTimeout = '#{node['jenkins-server']['plugins']['crowd2']['socketTimeout']}'
+    def httpTimeout = '#{node['jenkins-server']['plugins']['crowd2']['httpTimeout']}'
+    def httpMaxConnections = '#{node['jenkins-server']['plugins']['crowd2']['httpMaxConnections']}'
+
+    def crowdRealm = new de.theit.jenkins.crowd.CrowdSecurityRealm(
+      url,
+      applicationName,
+      password,
+      group,
+      nestedGroups,
+      sessionValidationInterval,
+      useSSO,
+      cookieDomain,
+      cookieTokenkey,
+      useProxy,
+      httpProxyHost,
+      httpProxyPort,
+      httpProxyUsername,
+      httpProxyPassword,
+      socketTimeout,
+      httpTimeout,
+      httpMaxConnections
+    )
+
+    instance.setSecurityRealm(crowdRealm)
 
     def strategy = new ProjectMatrixAuthorizationStrategy()
     strategy.add(Jenkins.ADMINISTER, "#{node['jenkins-server']['admin']['username']}")

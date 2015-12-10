@@ -87,6 +87,30 @@ default['jenkins-server']['plugins'] = {
   'bitbucket-pullrequest-builder' => {'version' => '1.4.5'}
 }
 
+# Crowd 2 (Jenkins authentication with Jira accounts)
+if node['jenkins-server']['security']['notifies']['resource'] == 'jenkins_script[configure crowd permissions]'
+  default['jenkins-server']['plugins']['crowd2'] = {
+    'version' => '1.8',
+    'url' => 'https://example.com/jira',
+    'applicationName' => 'Jenkins',
+    'password' => 'changethis',
+    'group' => 'stash-users', # JIRA groups that are allowed to login into Jenkins
+    'nestedGroups' => false,
+    'sessionValidationInterval' => 480, # minutes
+    'useSSO' => false,
+    'cookieDomain' => '',
+    'cookieTokenkey' => 'crowd.token_key',
+    'useProxy' => false,
+    'httpProxyHost' => '',
+    'httpProxyPort' => '',
+    'httpProxyUsername' => '',
+    'httpProxyPassword' => '',
+    'socketTimeout' => '20000',
+    'httpTimeout' => '5000',
+    'httpMaxConnections' => '20'
+  }
+end
+
 # Jobs
 default['jenkins-server']['jobs']['php-template'] = {}
 

@@ -183,9 +183,9 @@ The default recipe includes the following recipies:
     end
     
     include_recipe 'jenkins-server::master'
-    include_recipe 'jenkins-server::security'
     include_recipe 'jenkins-server::settings'
     include_recipe 'jenkins-server::plugins'
+    include_recipe 'jenkins-server::security'
     include_recipe 'jenkins-server::jobs'
     include_recipe 'jenkins-server::composer'
     
@@ -193,6 +193,11 @@ The default recipe includes the following recipies:
       include_recipe 'jenkins-server::slaves_credentials'
       include_recipe 'jenkins-server::slaves'
     end
+
+### jenkins-server::ssh_identity
+
+If SSH connections are made to other servers during a job, then Jenkins uses by default the private key in
+`#{default['jenkins']['master']['home']}/.ssh/id_rsa`. A private/public key pair can be generated with this recipe.
 
 ## License
 

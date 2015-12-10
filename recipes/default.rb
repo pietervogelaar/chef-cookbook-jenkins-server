@@ -15,9 +15,9 @@ if node['jenkins-server']['nginx']['install']
 end
 
 include_recipe 'jenkins-server::master'
-include_recipe 'jenkins-server::security'
 include_recipe 'jenkins-server::settings'
 include_recipe 'jenkins-server::plugins'
+include_recipe 'jenkins-server::security'
 include_recipe 'jenkins-server::jobs'
 include_recipe 'jenkins-server::composer'
 

@@ -1,3 +1,8 @@
+# 0.5.4
+
+- Added jenkins_script "configure crowd permissions" for Jenkins authentication with a JIRA account
+- Added documentation about the ssh_identity recipe
+
 # 0.5.3
 
 - Made executed resource after admin user creation configurable

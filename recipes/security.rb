@@ -54,7 +54,9 @@ jenkins_user node['jenkins-server']['admin']['username'] do
 end
 
 # By default Jenkins allows everybody. Configure "Project Matrix Authorization" and
-# give the admin user the "administrator" permission
+# give the admin user the "administrator" permission. If you want to further customize this resource,
+# copy it into your own recipe and name it "configure custom permissions" for example. And set
+# default['jenkins-server']['security']['notifies']['resource'] = 'jenkins_script[configure custom permissions]'.
 jenkins_script 'configure permissions' do
   command <<-EOH.gsub(/^ {4}/, '')
     import jenkins.model.*
@@ -76,7 +78,10 @@ jenkins_script 'configure permissions' do
 end
 
 # By default Jenkins allows everybody. Configure "Project Matrix Authorization", the CrowdSecurityRealm
-# for authentication with a JIRA account and give the admin user the "administrator" permission.
+# for authentication with a JIRA account and give the admin user the "administrator" permission. If you want
+# to further customize this resource, copy it into your own recipe and name it "configure custom crowd permissions"
+# for example. And set default['jenkins-server']['security']['notifies']['resource'] =
+# 'jenkins_script[configure custom crowd permissions]'.
 jenkins_script 'configure crowd permissions' do
   command <<-EOH.gsub(/^ {4}/, '')
     import jenkins.model.*

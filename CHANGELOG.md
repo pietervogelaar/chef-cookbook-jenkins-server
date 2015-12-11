@@ -1,3 +1,7 @@
+# 0.5.5
+
+- Fixes "undefined method `[]' for nil:NilClass" error introduced in 0.5.4
+
 # 0.5.4
 
 - Added jenkins_script "configure crowd permissions" for Jenkins authentication with a JIRA account

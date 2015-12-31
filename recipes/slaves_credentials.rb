@@ -8,7 +8,7 @@ username = node['jenkins-server']['slaves']['credential']['username']
 
 if username
   # Add this credential only once
-  unless node.attribute?("#{cookbook_name}_add_credential_#{username}_done")
+  unless node.attribute?("jenkins-server_add_credential_#{username}_done")
     jenkins_script "add_credential_#{username}" do
       command <<-EOH.gsub(/^ {4}/, '')
     import jenkins.model.*
@@ -36,7 +36,7 @@ if username
       EOH
     end
 
-    node.set["#{cookbook_name}_add_credential_#{username}_done"] = true
+    node.set["jenkins-server_add_credential_#{username}_done"] = true
     node.save
   end
 end

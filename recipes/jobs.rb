@@ -6,7 +6,7 @@ node['jenkins-server']['jobs'].each do |job, options|
 
   # Create the job template in the Chef cache directory
   template file do
-    cookbook options.key?('cookbook') ? options['cookbook'] : cookbook_name
+    cookbook options.key?('cookbook') ? options['cookbook'] : 'jenkins-server'
     source options.key?('source') ? options['source'] : "jobs/#{job}.xml.erb"
   end
 

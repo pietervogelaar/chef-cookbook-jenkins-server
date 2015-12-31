@@ -14,7 +14,7 @@ node['jenkins-server']['plugins'].each do |plugin, options|
       if options.key?('template_cookbook') && !options['template_cookbook'].nil?
         template_cookbook = options['template_cookbook']
       else
-        template_cookbook = cookbook_name
+        template_cookbook = 'jenkins-server'
       end
 
       if options.key?('template_source') && !options['template_source'].nil?
@@ -63,7 +63,7 @@ Chef::Log.debug '[JENKINS-SERVER] Configure Jenkins plugins'
 
 node['jenkins-server']['plugins'].each do |plugin, options|
   if !options['configure'].nil? && (options['configure'] == true || options['configure'] == 'recipe')
-    cookbook = options.key?('cookbook') && !options['cookbook'].nil? ? options['cookbook'] : cookbook_name
+    cookbook = options.key?('cookbook') && !options['cookbook'].nil? ? options['cookbook'] : 'jenkins-server'
     recipe = options.key?('recipe') && !options['recipe'].nil? ? options['recipe'] : "plugin_#{plugin}"
 
     include_recipe "#{cookbook}::#{recipe}"

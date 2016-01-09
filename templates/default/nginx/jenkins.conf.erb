@@ -8,7 +8,7 @@ server {
     ssl_certificate_key  <%= node['jenkins-server']['nginx']['ssl_key_path'] %>;
     <% end %>
 
-    root /var/www/nginx-default;
+    root <%= node['nginx']['default_root'] %>;
     index index.php index.html index.htm;
 
     location / {

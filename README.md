@@ -55,6 +55,19 @@ These platforms are officially supported, but it will probably also work on othe
 * `default['jenkins-server']['settings']['mailer']['reply_to_address']` - Reply to address. Default `node['jenkins-server']['settings']['system_email']`
 * `default['jenkins-server']['settings']['mailer']['charset']` - Mail charset. Default "UTF-8"
 
+### Node monitors
+
+Preventive node monitoring, configures the page http://your-jenkins-host/computer/configure.
+
+* `default['jenkins-server']['node_monitors']['architecture_monitor']['ignored']` - This monitor just shows the architecture of the slave for your information. It never marks the slave offline. Default `false`
+* `default['jenkins-server']['node_monitors']['clock_monitor']['ignored']` - This monitors the clock difference between the master and nodes. Default `false`
+* `default['jenkins-server']['node_monitors']['disk_space_monitor']['ignored']` - This monitors the available disk space of $JENKINS_HOME on each slave, and if it gets below a threshold, the slave will be marked offline. Default `false`
+* `default['jenkins-server']['node_monitors']['disk_space_monitor']['free_space_threshold']` - If a slave is found to have less free disk space than this amount, it will be marked offline. Default "1GB"
+* `default['jenkins-server']['node_monitors']['swap_space_monitor']['ignored']` - This monitors the available virtual memory space of the computer (commonly known as "swap space"), and if it goes below a threshold, the slave is marked offline. Default `false`
+* `default['jenkins-server']['node_monitors']['temporary_space_monitor']['ignored']` - This monitors the available disk space of the temporary directory, and if it gets below a certain threshold the node will be made offline. Default `false`
+* `default['jenkins-server']['node_monitors']['temporary_space_monitor']['free_space_threshold']` - If a slave is found to have less free disk space than this amount, it will be marked offline. Default "1GB"
+* `default['jenkins-server']['node_monitors']['response_time_monitor']['ignored']` - This monitors the round trip network response time from the master to the slave, and if it goes above a threshold repeatedly, it marks the slave offline. Default `false`
+
 ### Plugins
 
 These plugins are configured by default. See the attributes/default.rb for more details. Read for how to add a plugin the section "Adding plugins" further on.

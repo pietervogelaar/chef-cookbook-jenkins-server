@@ -56,3 +56,11 @@ jenkins_script 'configure settings' do
     descriptor.save()
   EOH
 end
+
+# Configure node monitors
+template "#{node['jenkins']['master']['home']}/nodeMonitors.xml" do
+  source 'jenkins/nodeMonitors.xml.erb'
+  owner node['jenkins']['master']['user']
+  group node['jenkins']['master']['group']
+  mode '0644'
+end

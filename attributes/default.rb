@@ -39,6 +39,16 @@ default['jenkins-server']['settings']['mailer']['smtp_port'] = ''
 default['jenkins-server']['settings']['mailer']['reply_to_address'] = ''
 default['jenkins-server']['settings']['mailer']['charset'] = 'UTF-8'
 
+# Node monitors
+default['jenkins-server']['node_monitors']['architecture_monitor']['ignored'] = false
+default['jenkins-server']['node_monitors']['clock_monitor']['ignored'] = false
+default['jenkins-server']['node_monitors']['disk_space_monitor']['ignored'] = false
+default['jenkins-server']['node_monitors']['disk_space_monitor']['free_space_threshold'] = '1GB'
+default['jenkins-server']['node_monitors']['swap_space_monitor']['ignored'] = false
+default['jenkins-server']['node_monitors']['temporary_space_monitor']['ignored'] = false
+default['jenkins-server']['node_monitors']['temporary_space_monitor']['free_space_threshold'] = '1GB'
+default['jenkins-server']['node_monitors']['response_time_monitor']['ignored'] = false
+
 # Plugins
 default['jenkins-server']['plugins'] = {
   # General

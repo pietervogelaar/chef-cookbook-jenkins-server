@@ -6,7 +6,7 @@
 
 username = node['jenkins-server']['slaves']['credential']['username']
 
-if username
+if username # ~FC023
   # Add this credential only once
   unless node.attribute?("jenkins-server_add_credential_#{username}_done")
     jenkins_script "add_credential_#{username}" do
@@ -37,6 +37,9 @@ if username
     end
 
     node.set["jenkins-server_add_credential_#{username}_done"] = true
-    node.save
+
+    unless Chef::Config[:solo]
+      node.save
+    end
   end
 end

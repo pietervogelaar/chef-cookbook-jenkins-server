@@ -42,7 +42,7 @@ end
 if node.attribute?('jenkins_security_enabled')
   Chef::Log.debug '[JENKINS] Security is enabled in a previous run'
 
-  node.run_state[:jenkins_private_key] = File.read("#{Chef::Config[:file_cache_path]}/jenkins-key")
+  node.run_state[:jenkins_private_key] = File.read("#{Chef::Config[:file_cache_path]}/jenkins-key") # ~FC001
 end
 
 # Add the admin user, but only the first run
@@ -144,9 +144,12 @@ end
 # Set the jenkins_security_enabled flag and set run_state to use the configured private key
 ruby_block 'set jenkins_security_enabled flag' do
   block do
-    node.run_state[:jenkins_private_key] = jenkins_user['private_key']
+    node.run_state[:jenkins_private_key] = jenkins_user['private_key'] # ~FC001
     node.set['jenkins_security_enabled'] = true
-    node.save
+
+    unless Chef::Config[:solo]
+      node.save
+    end
   end
   action :nothing
 end

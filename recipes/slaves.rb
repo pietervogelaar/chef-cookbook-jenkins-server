@@ -1,14 +1,14 @@
-# Search for nodes that have an attribute node['jenkins-server']['slave']
-search(:node, node['jenkins-server']['slaves']['search_query'],
-  :filter_result => {
-    'jenkins-server' => [ 'jenkins-server' ],
-  }
-).each do |item|
-  Chef::Log.debug "[JENKINS-SERVER]: Slave search result item [#{item}]"
+unless Chef::Config[:solo]
+  # Search for nodes that have an attribute node['jenkins-server']['slave']
+  search(:node, node['jenkins-server']['slaves']['search_query'],
+    :filter_result => {
+      'jenkins-server' => [ 'jenkins-server' ],
+    }
+  ).each do |item|
+    Chef::Log.debug "[JENKINS-SERVER]: Slave search result item [#{item}]"
 
-  slave = item['jenkins-server']['slave']
+    slave = item['jenkins-server']['slave']
 
-  if slave.key?('type') && slave['type'] == 'ssh'
     # Add Jenkins SSH slave
     jenkins_ssh_slave slave['name'] do
       host        slave['host']
@@ -26,6 +26,8 @@ search(:node, node['jenkins-server']['slaves']['search_query'],
       if slave.key?('offline_reason') then offline_reason slave['offline_reason'] end
       if slave.key?('jvm_options') then jvm_options slave['jvm_options'] end
       if slave.key?('java_path') then java_path slave['java_path'] end
+
+      only_if { slave.key?('type') && slave['type'] == 'ssh' }
     end
   end
 end

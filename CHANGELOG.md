@@ -1,3 +1,11 @@
+# 0.6.0
+
+- Fixed some foodcritic rules
+- Set Jenkins to the latest LTS version
+- Node monitors can be configured
+- Added Chef Solo support
+- Basic authentication header must not be disabled
+
 # 0.5.5
 
 - Fixes "undefined method `[]' for nil:NilClass" error introduced in 0.5.4

@@ -65,17 +65,18 @@ default['jenkins-server']['plugins'] = {
       # Markup: safe_html or plain_text
       'markup' => 'safe_html',
       # Disable syntax highlighting is only available with safe_html markup
-      'disable_syntax_highlighting' => false,
+      'disable_syntax_highlighting' => false
   },
   'gravatar' => {'version' => '2.1'},
   'ws-cleanup' => {'version' => '0.26'},
   'ansicolor' => {'version' => '0.4.1'},
   'build-monitor-plugin' => {'version' => '1.6+build.150'},
   'git' => {
-    'version' => '2.3.5',
+    'version' => '2.4.1',
     'configure' => true,
     'global_config_name' => 'Jenkins',
-    'global_config_email' => 'jenkins@localhost.local'
+    'global_config_email' => 'jenkins@localhost.local',
+    'create_account_based_on_email' => false
   },
   'ant' => {'version' => '1.2'},
 

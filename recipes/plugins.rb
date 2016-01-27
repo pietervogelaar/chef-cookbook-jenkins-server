@@ -55,7 +55,10 @@ unless node.attribute?('jenkins_restarted_once')
   end
 
   node.set['jenkins_restarted_once'] = true
-  node.save
+
+  unless Chef::Config[:solo]
+    node.save
+  end
 end
 
 # Configure plugins

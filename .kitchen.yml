@@ -21,6 +21,8 @@ suites:
     provisioner:
       client_rb:
         environment: production
+      solo_rb:
+        environment: production
     driver:
       vm_hostname: jenkins-server001.local
       network:

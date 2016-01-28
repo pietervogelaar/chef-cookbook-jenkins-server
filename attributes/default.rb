@@ -60,12 +60,12 @@ default['jenkins-server']['plugins'] = {
     'ignore_accept_language' => true
   },
   'antisamy-markup-formatter' => {
-      'version' => '1.1',
-      'configure' => true,
-      # Markup: safe_html or plain_text
-      'markup' => 'safe_html',
-      # Disable syntax highlighting is only available with safe_html markup
-      'disable_syntax_highlighting' => false
+    'version' => '1.1',
+    'configure' => true,
+    # Markup: safe_html or plain_text
+    'markup' => 'safe_html',
+    # Disable syntax highlighting is only available with safe_html markup
+    'disable_syntax_highlighting' => false
   },
   'gravatar' => {'version' => '2.1'},
   'ws-cleanup' => {'version' => '0.26'},
@@ -73,7 +73,9 @@ default['jenkins-server']['plugins'] = {
   'build-monitor-plugin' => {'version' => '1.6+build.150'},
   'git' => {
     'version' => '2.4.1',
-    'configure' => true,
+    'configure' => 'template',
+    'template_path' => 'hudson.plugins.git.GitSCM.xml',
+    'template_source' => 'jenkins/plugins/hudson.plugins.git.GitSCM.xml.erb',
     'global_config_name' => 'Jenkins',
     'global_config_email' => 'jenkins@localhost.local',
     'create_account_based_on_email' => false

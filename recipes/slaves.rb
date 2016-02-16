@@ -1,5 +1,5 @@
 unless Chef::Config[:solo]
-  # Search for nodes that have an attribute node['jenkins-server']['slave']
+  # Search for nodes that have an attribute node['jenkins-server-slave']
   search(:node, node['jenkins-server']['slaves']['search_query'],
     :filter_result => {
       node['jenkins-server']['slaves']['search_key'] => [node['jenkins-server']['slaves']['search_key']],

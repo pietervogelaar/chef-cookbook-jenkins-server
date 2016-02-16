@@ -30,4 +30,4 @@ data = {
 }
 
 # Set a Jenkins slave attribute that the Jenkins master server will find with a search
-node.default['jenkins-server']['slave'] = data
+node.default['jenkins-server-slave'] = data

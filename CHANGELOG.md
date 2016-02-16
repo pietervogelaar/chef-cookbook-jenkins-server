@@ -1,3 +1,7 @@
+# 0.7.1
+
+- Updated slaves search key in the jenkins_slave recipe
+
 # 0.7.0
 
 - BC break: Changed search key so that it's easy to configure

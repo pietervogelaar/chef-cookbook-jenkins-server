@@ -1,3 +1,7 @@
+# 0.7.0
+
+- BC break: Changed search key so that it's easy to configure
+
 # 0.6.0
 
 - Fixed some foodcritic rules

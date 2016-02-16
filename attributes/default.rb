@@ -131,7 +131,8 @@ default['jenkins-server']['jobs']['php-template'] = {}
 default['jenkins-server']['slaves']['enable'] = false
 default['jenkins-server']['slaves']['credential']['username'] = 'deployer' # The Jenkins master will login as this user on slaves
 default['jenkins-server']['slaves']['credential']['description'] = 'Deployer'
-default['jenkins-server']['slaves']['search_query'] = "jenkins-server_slave:* AND chef_environment:#{node.chef_environment} AND NOT fqdn:#{node['fqdn']}"
+default['jenkins-server']['slaves']['search_key'] = 'jenkins-server-slave'
+default['jenkins-server']['slaves']['search_query'] = "jenkins-server-slave:* AND chef_environment:#{node.chef_environment} AND NOT fqdn:#{node['fqdn']}"
 
 # Dev_mode attributes
 default['jenkins-server']['dev_mode']['security']['password'] = 'admin'

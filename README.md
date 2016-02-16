@@ -92,7 +92,8 @@ By default the "php-template" job is installed from [Jenkins-php.org](http://jen
 * `default['jenkins-server']['slaves']['enable']` - If slaves must be enabled. Default `false`
 * `default['jenkins-server']['slaves']['credential']['username']` - The Jenkins master will login as this user on slaves. Default "deployer"
 * `default['jenkins-server']['slaves']['credential']['description']` - Description. Default "Deployer"
-* `default['jenkins-server']['slaves']['search_query']` - The search query for finding slaves. Default `jenkins-server_slave:* AND chef_environment:#{node.chef_environment} AND NOT fqdn:#{node['fqdn']}`
+* `default['jenkins-server']['slaves']['search_key']` - Attribute that contains slave settings on a slave node. Default "jenkins-server-slave"
+* `default['jenkins-server']['slaves']['search_query']` - The search query for finding slaves. Default `jenkins-server-slave:* AND chef_environment:#{node.chef_environment} AND NOT fqdn:#{node['fqdn']}`
 
 Include or copy the **jenkins_slave** recipe to a cookbook that is in the run list of each server that you want to be a Jenkins slave.
 

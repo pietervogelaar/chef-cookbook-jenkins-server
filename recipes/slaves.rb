@@ -2,12 +2,12 @@ unless Chef::Config[:solo]
   # Search for nodes that have an attribute node['jenkins-server']['slave']
   search(:node, node['jenkins-server']['slaves']['search_query'],
     :filter_result => {
-      'jenkins-server' => [ 'jenkins-server' ],
+      node['jenkins-server']['slaves']['search_key'] => [node['jenkins-server']['slaves']['search_key']],
     }
   ).each do |item|
     Chef::Log.debug "[JENKINS-SERVER]: Slave search result item [#{item}]"
 
-    slave = item['jenkins-server']['slave']
+    slave = item[node['jenkins-server']['slaves']['search_key']]
 
     # Add Jenkins SSH slave
     jenkins_ssh_slave slave['name'] do

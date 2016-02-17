@@ -71,8 +71,9 @@ default['jenkins-server']['plugins'] = {
   'ws-cleanup' => {'version' => '0.26'},
   'ansicolor' => {'version' => '0.4.1'},
   'build-monitor-plugin' => {'version' => '1.6+build.150'},
+  'git-client' => {'version' => '1.19.4'},
   'git' => {
-    'version' => '2.4.1',
+    'version' => '2.4.2',
     'configure' => 'template',
     'template_path' => 'hudson.plugins.git.GitSCM.xml',
     'template_source' => 'jenkins/plugins/hudson.plugins.git.GitSCM.xml.erb',

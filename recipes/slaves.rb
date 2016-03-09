@@ -1,4 +1,6 @@
 unless Chef::Config[:solo]
+  managed_slaves = []
+
   # Search for nodes that have an attribute node['jenkins-server-slave']
   search(:node, node['jenkins-server']['slaves']['search_query'],
     :filter_result => {
@@ -8,6 +10,7 @@ unless Chef::Config[:solo]
     Chef::Log.debug "[JENKINS-SERVER]: Slave search result item [#{item}]"
 
     slave = item[node['jenkins-server']['slaves']['search_key']]
+    managed_slaves << slave['name']
 
     # Add Jenkins SSH slave
     jenkins_ssh_slave slave['name'] do
@@ -28,6 +31,21 @@ unless Chef::Config[:solo]
       if slave.key?('java_path') then java_path slave['java_path'] end
 
       only_if { slave.key?('type') && slave['type'] == 'ssh' }
+    end
+  end
+
+  # Purge slaves
+  if Dir.exists?("#{node['jenkins']['master']['home']}/nodes")
+    Dir.foreach("#{node['jenkins']['master']['home']}/nodes") do |slave|
+      next if slave == '.' or slave == '..'
+
+      unless managed_slaves.include?(slave)
+        Chef::Log.debug "[JENKINS-SERVER] Delete unmanaged slave [#{slave}]"
+
+        jenkins_slave slave do
+          action :delete
+        end
+      end
     end
   end
 end

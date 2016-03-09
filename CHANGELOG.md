@@ -1,3 +1,7 @@
+# 0.7.2
+
+- Added slave purge
+
 # 0.7.1
 
 - Updated slaves search key in the jenkins_slave recipe

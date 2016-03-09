@@ -35,7 +35,7 @@ unless Chef::Config[:solo]
   end
 
   # Purge slaves
-  if Dir.exists?("#{node['jenkins']['master']['home']}/nodes")
+  if Dir.exists?("#{node['jenkins']['master']['home']}/nodes") # ~FC023
     Dir.foreach("#{node['jenkins']['master']['home']}/nodes") do |slave|
       next if slave == '.' or slave == '..'
 

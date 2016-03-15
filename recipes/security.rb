@@ -26,14 +26,14 @@ if node['jenkins-server']['security']['strategy'] == 'generate'
 else
   if node['dev_mode']
     jenkins_user = {
-        'password' => node['jenkins-server']['dev_mode']['security']['password'],
-        'private_key' => node['jenkins-server']['dev_mode']['security']['private_key'],
-        'public_key' => node['jenkins-server']['dev_mode']['security']['public_key']
+      'password' => node['jenkins-server']['dev_mode']['security']['password'],
+      'private_key' => node['jenkins-server']['dev_mode']['security']['private_key'],
+      'public_key' => node['jenkins-server']['dev_mode']['security']['public_key']
     }
   else
     jenkins_user = chef_vault_item(
-        node['jenkins-server']['security']['chef-vault']['data_bag'],
-        node['jenkins-server']['security']['chef-vault']['data_bag_item']
+      node['jenkins-server']['security']['chef-vault']['data_bag'],
+      node['jenkins-server']['security']['chef-vault']['data_bag_item']
     )
   end
 end
@@ -50,7 +50,12 @@ jenkins_user node['jenkins-server']['admin']['username'] do
   password jenkins_user['password']
   public_keys [jenkins_user['public_key']]
   not_if { node.attribute?('jenkins_security_enabled') }
+end
+
+ruby_block 'init permission configuration' do
+  block do end
   notifies :execute, node['jenkins-server']['security']['notifies']['resource'], :immediately
+  action :run
 end
 
 # By default Jenkins allows everybody. Configure "Project Matrix Authorization" and
@@ -84,6 +89,12 @@ end
 # 'jenkins_script[configure custom crowd permissions]'.
 jenkins_script 'configure crowd permissions' do
   if node['jenkins-server']['plugins']['crowd2']
+    # Give all groups that are allowed to authenticate the overall read permission
+    strategies = []
+    node['jenkins-server']['plugins']['crowd2']['group'].split(',').each do |group|
+      strategies << "strategy.add(Jenkins.READ, \"#{group.strip}\")"
+    end
+
     command <<-EOH.gsub(/^ {4}/, '')
       import jenkins.model.*
       import hudson.security.*
@@ -132,6 +143,7 @@ jenkins_script 'configure crowd permissions' do
 
       def strategy = new ProjectMatrixAuthorizationStrategy()
       strategy.add(Jenkins.ADMINISTER, "#{node['jenkins-server']['admin']['username']}")
+      #{strategies.join("\n")}
       instance.setAuthorizationStrategy(strategy)
 
       instance.save()
@@ -151,5 +163,6 @@ ruby_block 'set jenkins_security_enabled flag' do
       node.save
     end
   end
+  not_if { node.attribute?('jenkins_security_enabled') }
   action :nothing
 end

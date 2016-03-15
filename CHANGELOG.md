@@ -1,3 +1,8 @@
+# 0.7.3
+
+- All JIRA groups that are allowed to authenticate get the overall read permission
+- Global security is set every run instead of only the first run
+
 # 0.7.2
 
 - Added slave purge

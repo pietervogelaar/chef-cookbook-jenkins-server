@@ -94,6 +94,7 @@ Jenkins views can be specified with attributes like:
     default['jenkins-server']['views']['myview'] = {
       'class' => 'com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView', # A ListView is default if no class is defined  
       'include_regex' => '.*',
+      'description' => 'My view'
     }
 
 * `default['jenkins-server']['views']` - A hash that contains views

@@ -123,7 +123,7 @@ will be used to setup Jenkins security.
 
 Some attributes that overwrite the [Jenkins cookbook](https://supermarket.chef.io/cookbooks/jenkins) attributes:
 
-* `default['jenkins']['master']['version']` - Jenkins version. Default 1.619-1.1
+* `default['jenkins']['master']['version']` - Jenkins version. Default 1.642-1.1
 * `default['jenkins']['master']['jvm_options']` - JVM options. Default "-Xms256m -Xmx256m" which sets the memory usage to 256 MB
 * `default['jenkins']['master']['listen_address']` - Listen address. Default "127.0.0.1". So the Jenkins application is only reachable from localhost or through Nginx.
 

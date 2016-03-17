@@ -1,3 +1,7 @@
+# 0.7.4
+
+- Views are managed
+
 # 0.7.3
 
 - All JIRA groups that are allowed to authenticate get the overall read permission

@@ -87,6 +87,18 @@ Jenkins jobs can be specified with attributes like:
     
 By default the "php-template" job is installed from [Jenkins-php.org](http://jenkins-php.org). 
 
+### Views
+
+Jenkins views can be specified with attributes like:
+
+    default['jenkins-server']['views']['myview'] = {
+      'class' => 'com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView', # A ListView is default if no class is defined  
+      'include_regex' => '.*',
+    }
+
+* `default['jenkins-server']['views']` - A hash that contains views
+* `default['jenkins-server']['purge_views']` - If views must be purged. Default `true`
+
 ### Slaves
 
 * `default['jenkins-server']['slaves']['enable']` - If slaves must be enabled. Default `false`

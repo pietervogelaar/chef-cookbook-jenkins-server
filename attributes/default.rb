@@ -128,6 +128,10 @@ end
 # Jobs
 default['jenkins-server']['jobs']['php-template'] = {}
 
+# Views
+default['jenkins-server']['views'] = {}
+default['jenkins-server']['purge_views'] = true
+
 # Slaves
 default['jenkins-server']['slaves']['enable'] = false
 default['jenkins-server']['slaves']['credential']['username'] = 'deployer' # The Jenkins master will login as this user on slaves

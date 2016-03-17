@@ -1,3 +1,7 @@
+# 0.7.5 (2016-03-17)
+
+- Moved views configuration to a separate recipe so that views provided by plugins can be used
+
 # 0.7.4 (2016-03-17)
 
 - Views are managed

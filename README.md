@@ -1,4 +1,5 @@
 # jenkins-server
+[![Cookbook Version](https://img.shields.io/cookbook/v/jenkins-server.svg)](https://supermarket.chef.io/cookbooks/jenkins-server) [![Code Climate](https://codeclimate.com/github/chef-cookbooks/jenkins-server/badges/gpa.svg)](https://codeclimate.com/github/chef-cookbooks/jenkins-server)
 
 This cookbook installs a complete Jenkins server with plugins and is highly configurable with attributes in this cookbook. It configures settings, plugins, security, slaves and depends on the [Jenkins](https://supermarket.chef.io/cookbooks/jenkins) cookbook that is used as foundation. It also installs (can be disabled) the Jenkins plugins, php-template job and required PHP tools as described on [jenkins-php.org](http://jenkins-php.org).
 
